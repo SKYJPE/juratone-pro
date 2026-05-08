@@ -4677,69 +4677,6 @@ const LEG_CSS = `
 /* ── BLOC 2 — Données placeholder ──────────────────────────────
    ⚠️ Supprimer ce bloc quand le Monolithe Données est disponible.
 ─────────────────────────────────────────────────────────────── */
-const CODE_JUDICIAIRE = {
-  livres: [
-    {
-      id: "L1", numero: "Ier",
-      titre: "Des principes généraux", details: "Art. 1 à 57",
-      titres: [
-        {
-          id: "L1T1", titre: "TITRE Ier. — De l'action en justice",
-          chapitres: [
-            {
-              id: "L1T1C1", titre: "CHAPITRE Ier. — De l'action",
-              articles: [
-                { numero: "17", texte: "L'action ne peut être admise si le demandeur n'a pas qualité et intérêt pour la former." },
-                { numero: "18", texte: "L'intérêt doit être né et actuel. L'action peut cependant être admise dès à présent s'il est certain que la naissance de l'intérêt ne peut être contestée et que celle-ci ne peut se réaliser qu'après l'expiration du délai prescrit par la loi." },
-                { numero: "19", texte: "[Placeholder — texte officiel à importer via le Monolithe Données]" },
-              ]
-            },
-            {
-              id: "L1T1C2", titre: "CHAPITRE II. — De la demande en justice",
-              articles: [
-                { numero: "23", texte: "[Placeholder — texte officiel à importer]" },
-                { numero: "24", texte: "[Placeholder — texte officiel à importer]" },
-              ]
-            }
-          ]
-        },
-        {
-          id: "L1T2", titre: "TITRE II. — Du principe de la contradiction",
-          chapitres: [
-            {
-              id: "L1T2C1", titre: "CHAPITRE Ier. — De la communication",
-              articles: [
-                { numero: "27", texte: "[Placeholder — texte officiel à importer]" },
-                { numero: "28", texte: "[Placeholder — texte officiel à importer]" },
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    { id: "L2", numero: "II",   titre: "De la compétence",                                         details: "Art. 58 à 569",    titres: [] },
-    { id: "L3", numero: "III",  titre: "Des actes de procédure",                                   details: "Art. 570 à 867",   titres: [] },
-    { id: "L4", numero: "IV",   titre: "Des voies de recours",                                     details: "Art. 868 à 1147",  titres: [] },
-    { id: "L5", numero: "V",    titre: "De la liquidation",                                        details: "Art. 1148 à 1224", titres: [] },
-    { id: "L6", numero: "VI",   titre: "Des saisies conservatoires et voies d'exécution",          details: "Art. 1225 à 1675", titres: [] },
-    { id: "L7", numero: "VII",  titre: "De l'arbitrage",                                           details: "Art. 1676 à 1723", titres: [] },
-    { id: "L8", numero: "VIII", titre: "De la médiation",                                          details: "Art. 1724 à 1737", titres: [] },
-  ]
-};
-
-/* ── BLOC 3 — Index calculés (recalculés automatiquement si CODE_JUDICIAIRE change) ── */
-const LIVRE_MAP = Object.fromEntries(CODE_JUDICIAIRE.livres.map(l => [l.id, l]));
-
-const ALL_ARTICLES = (() => {
-  const out = [];
-  for (const livre of CODE_JUDICIAIRE.livres)
-    for (const titre of livre.titres)
-      for (const chap of titre.chapitres)
-        for (const art of chap.articles)
-          out.push({ ...art, livreId: livre.id, livreNumero: livre.numero, livreTitre: livre.titre, titreId: titre.id, chapitreId: chap.id, chapitreTitre: chap.titre });
-  return out;
-})();
-
 function findChapitre(livreId, chapitreId) {
   const livre = LIVRE_MAP[livreId];
   if (!livre) return null;
