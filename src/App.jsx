@@ -4916,52 +4916,62 @@ const LegislationPage = ({ setPage }) => {
       <CjBreadcrumb items={crumbs} />
       {navCodeId === "judiciaire" && <CjSearchBar value={search} onChange={setSearch} onClear={() => setSearch("")} />}
 
-      {navCodeId === "civil" ? (
-        <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
-          <IcoScales size={32} color={T.dim} />
-          <h2 style={{ fontFamily: SERIF, fontSize: 24, color: T.text, margin: "20px 0 10px" }}>Code Civil en cours de développement</h2>
-          <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 28px", lineHeight: 1.6 }}>Le code civil sera bientôt disponible avec la même interface interactive.</p>
-          <Btn onClick={() => goCodes()}>Retour aux codes</Btn>
-        </div>
-      ) : search.trim().length >= 2 ? (
-        <CjSearchResults
-          results={searchResults}
-          query={search}
-          onSelect={art => { setSearch(""); setNavLivreId(art.livreId); setNavChapitreId(art.chapitreId); setNavArticleNo(art.numero); }}
-        />
-      ) : !navCodeId ? (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 20 }}>
-          {CODES.map(code => (
-            <button key={code.id} onClick={() => goCode(code.id)} className="card-sit">
-              <div className="accent" style={{ background: T.navy }} />
-              <div className="ico-wrap"><code.Icon size={28} color={T.navy} /></div>
-              <div>
-                <div style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, marginBottom: 8, lineHeight: 1.3 }}>{code.title}</div>
-                <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.6 }}>{code.desc}</p>
-              </div>
-              <div className="cta">Explorer <IcoArrow size={14} /></div>
-            </button>
-          ))}
-        </div>
-      ) : navCodeId === "judiciaire" && !currentLivre ? (
-        <CjLivresGrid onSelect={goLivre} />
-      ) : navCodeId === "judiciaire" && !currentChapitre ? (
-        <>
-          <h2 style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, margin: "0 0 20px" }}>
-            Livre {currentLivre.numero} — {currentLivre.titre}
-          </h2>
-          <CjLivreView livre={currentLivre} openTitres={openTitres} onToggleTitre={toggleTitre} onSelectChapitre={goChapitre} />
-        </>
-      ) : navCodeId === "judiciaire" && !currentArticle ? (
-        <>
-          <h2 style={{ fontFamily: SERIF, fontSize: 18, fontWeight: 700, color: T.text, margin: "0 0 20px", lineHeight: 1.4 }}>
-            {currentChapitre.chap.titre}
-          </h2>
-          <CjChapitreView chap={currentChapitre.chap} onSelectArticle={goArticle} />
-        </>
-      ) : navCodeId === "judiciaire" && currentArticle ? (
-        <CjArticleView article={currentArticle} prevArt={prevArt} nextArt={nextArt} onNav={goArticle} />
-      ) : null}
+      {(() => {
+        if (navCodeId === "civil") {
+          return (
+            <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
+              <IcoScales size={32} color={T.dim} />
+              <h2 style={{ fontFamily: SERIF, fontSize: 24, color: T.text, margin: "20px 0 10px" }}>Code Civil en cours de développement</h2>
+              <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 28px", lineHeight: 1.6 }}>Le code civil sera bientôt disponible avec la même interface interactive.</p>
+              <Btn onClick={() => goCodes()}>Retour aux codes</Btn>
+            </div>
+          );
+        } else if (search.trim().length >= 2) {
+          return <CjSearchResults results={searchResults} query={search} onSelect={art => { setSearch(""); setNavLivreId(art.livreId); setNavChapitreId(art.chapitreId); setNavArticleNo(art.numero); }} />;
+        } else if (!navCodeId) {
+          return (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 20 }}>
+              {CODES.map(code => (
+                <button key={code.id} onClick={() => goCode(code.id)} className="card-sit">
+                  <div className="accent" style={{ background: T.navy }} />
+                  <div className="ico-wrap"><code.Icon size={28} color={T.navy} /></div>
+                  <div>
+                    <div style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, marginBottom: 8, lineHeight: 1.3 }}>{code.title}</div>
+                    <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.6 }}>{code.desc}</p>
+                  </div>
+                  <div className="cta">Explorer <IcoArrow size={14} /></div>
+                </button>
+              ))}
+            </div>
+          );
+        } else if (navCodeId === "judiciaire") {
+          if (!currentLivre) {
+            return <CjLivresGrid onSelect={goLivre} />;
+          } else if (!currentChapitre) {
+            return (
+              <>
+                <h2 style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, margin: "0 0 20px" }}>
+                  Livre {currentLivre.numero} — {currentLivre.titre}
+                </h2>
+                <CjLivreView livre={currentLivre} openTitres={openTitres} onToggleTitre={toggleTitre} onSelectChapitre={goChapitre} />
+              </>
+            );
+          } else if (!currentArticle) {
+            return (
+              <>
+                <h2 style={{ fontFamily: SERIF, fontSize: 18, fontWeight: 700, color: T.text, margin: "0 0 20px", lineHeight: 1.4 }}>
+                  {currentChapitre.chap.titre}
+                </h2>
+                <CjChapitreView chap={currentChapitre.chap} onSelectArticle={goArticle} />
+              </>
+            );
+          } else {
+            return <CjArticleView article={currentArticle} prevArt={prevArt} nextArt={nextArt} onNav={goArticle} />;
+          }
+        } else {
+          return <div style={{ textAlign: "center", padding: "50px" }}>Erreur: état inconnu</div>;
+        }
+      })()}
     </div>
   );
 };
