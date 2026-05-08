@@ -4586,7 +4586,7 @@ const ALL_ARTICLES = (() => {
       for (const chap of titre.chapitres) {
         for (const art of chap.articles) {
           arts.push({ ...art, livreId: livre.id, livreNumero: livre.numero,
-            livreTitre: livre.titre, titreTitre: titre.titre, chapTitre: chap.titre });
+            livreTitre: livre.titre, titreTitre: titre.titre, chapitreId: chap.id, chapitreTitre: chap.titre });
         }
       }
     }
