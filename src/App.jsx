@@ -205,8 +205,8 @@ const RESSOURCES = [
 ];
 
 const CODES = [
-  { id: "civil",     title: "Code Civil",     desc: "Droit civil belge",     icon: IcoScales },
-  { id: "judiciaire", title: "Code Judiciaire", desc: "Procédure et organisation judiciaire", icon: IcoGavel },
+  { id: "civil",     title: "Code Civil",     desc: "Droit civil belge",     Icon: IcoScales },
+  { id: "judiciaire", title: "Code Judiciaire", desc: "Procédure et organisation judiciaire", Icon: IcoGavel },
 ];
 
 const TOOL_PAGE_IDS  = new Set(["preavis","immo","succession","routier","indexation","fraisjustice","pension","checklists","juridometre","jurisprudence","doctrine","legislation","guide"]);
