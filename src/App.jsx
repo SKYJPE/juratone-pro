@@ -204,9 +204,7 @@ const RESSOURCES = [
   { id: "legislation",   cat: "Textes",    title: "Législation",          desc: "Justel, Moniteur belge, EUR-Lex, Wallex, Gallilex, DroitBelge.net." },
 ];
 
-const TOOL_PAGE_IDS  = situation && TOOL_PAGE_IDS.has(page)  && (
-  page === "legislation" ? <LegislationPage setPage={setPage} /> : <GenericPage setPage={setPage} />
-)}
+const TOOL_PAGE_IDS  = new Set(["preavis","immo","succession","routier","indexation","fraisjustice","pension","checklists","juridometre","jurisprudence","doctrine","legislation","guide"]);
 const SITUATION_MAP  = Object.fromEntries(SITUATIONS.map(s => [s.id, s]));
 
 /* ═══════════════════════════════════════════════════════════════
