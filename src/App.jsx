@@ -204,6 +204,11 @@ const RESSOURCES = [
   { id: "legislation",   cat: "Textes",    title: "Législation",          desc: "Justel, Moniteur belge, EUR-Lex, Wallex, Gallilex, DroitBelge.net." },
 ];
 
+const CODES = [
+  { id: "civil",     title: "Code Civil",     desc: "Droit civil belge",     icon: IcoScales },
+  { id: "judiciaire", title: "Code Judiciaire", desc: "Procédure et organisation judiciaire", icon: IcoGavel },
+];
+
 const TOOL_PAGE_IDS  = new Set(["preavis","immo","succession","routier","indexation","fraisjustice","pension","checklists","juridometre","jurisprudence","doctrine","legislation","guide"]);
 const SITUATION_MAP  = Object.fromEntries(SITUATIONS.map(s => [s.id, s]));
 
@@ -4830,12 +4835,21 @@ const CjSearchResults = ({ results, query, onSelect }) => (
 
 /* ── BLOC 6 — Composant principal ── */
 const LegislationPage = ({ setPage }) => {
+  const [navCodeId,     setNavCodeId]     = useState(null);
   const [navLivreId,    setNavLivreId]    = useState(null);
   const [navChapitreId, setNavChapitreId] = useState(null);
   const [navArticleNo,  setNavArticleNo]  = useState(null);
   const [openTitres,    setOpenTitres]    = useState(new Set());
   const [search,        setSearch]        = useState("");
 
+  const goCodes    = () => { setNavCodeId(null); setNavLivreId(null); setNavChapitreId(null); setNavArticleNo(null); };
+  const goCode     = (id) => {
+    setNavCodeId(id); setNavLivreId(null); setNavChapitreId(null); setNavArticleNo(null);
+    if (id === "judiciaire") {
+      const first = LIVRE_MAP["L00"]?.titres[0];
+      if (first) setOpenTitres(new Set([first.id]));
+    }
+  };
   const goLivres   = () => { setNavLivreId(null); setNavChapitreId(null); setNavArticleNo(null); };
   const goLivre    = (id) => {
     setNavLivreId(id); setNavChapitreId(null); setNavArticleNo(null);
@@ -4846,11 +4860,11 @@ const LegislationPage = ({ setPage }) => {
   const goArticle  = (no) => setNavArticleNo(no);
   const toggleTitre = (id) => setOpenTitres(prev => {
     const next = new Set(prev);
-    next.has(id) ? next.delete
-        (id) : next.add(id);
+    next.has(id) ? next.delete(id) : next.add(id);
     return next;
   });
 
+  const currentCode     = navCodeId     ? CODES.find(c => c.id === navCodeId) : null;
   const currentLivre    = navLivreId    ? LIVRE_MAP[navLivreId] : null;
   const currentChapitre = navChapitreId ? findChapitre(navLivreId, navChapitreId) : null;
   const currentArticle  = navArticleNo && currentChapitre
@@ -4870,7 +4884,8 @@ const LegislationPage = ({ setPage }) => {
     ).slice(0, 40);
   })();
 
-  const crumbs = [{ label: "Législation", onClick: goLivres }];
+  const crumbs = [{ label: "Législation", onClick: goCodes }];
+  if (currentCode)     crumbs.push({ label: currentCode.title, onClick: (currentLivre || currentChapitre || currentArticle) ? () => goCode(currentCode.id) : null });
   if (currentLivre)    crumbs.push({ label: `Livre ${currentLivre.numero} — ${currentLivre.titre}`, onClick: (currentChapitre || currentArticle) ? () => goLivre(currentLivre.id) : null });
   if (currentChapitre) crumbs.push({ label: currentChapitre.chap.titre.replace(/CHAPITRE [IVX]+\. — /, ""), onClick: currentArticle ? () => goChapitre(currentChapitre.chap.id) : null });
   if (currentArticle)  crumbs.push({ label: `Article ${currentArticle.numero}` });
@@ -4889,39 +4904,64 @@ const LegislationPage = ({ setPage }) => {
           <IcoBook />
         </div>
         <div>
-          <h1 style={{ fontFamily: SERIF, fontSize: 26, fontWeight: 700, color: T.text, margin: "0 0 3px", lineHeight: 1.2 }}>Code judiciaire</h1>
-          <p style={{ fontFamily: SANS, fontSize: 12, color: T.muted, margin: 0 }}>Loi du 10 octobre 1967 · Belgique</p>
+          <h1 style={{ fontFamily: SERIF, fontSize: 26, fontWeight: 700, color: T.text, margin: "0 0 3px", lineHeight: 1.2 }}>
+            {currentCode ? currentCode.title : "Législation"}
+          </h1>
+          <p style={{ fontFamily: SANS, fontSize: 12, color: T.muted, margin: 0 }}>
+            {currentCode ? (currentCode.id === "judiciaire" ? "Loi du 10 octobre 1967 · Belgique" : "À venir") : "Codes juridiques belges"}
+          </p>
         </div>
       </div>
 
       <CjBreadcrumb items={crumbs} />
-      <CjSearchBar value={search} onChange={setSearch} onClear={() => setSearch("")} />
+      {navCodeId === "judiciaire" && <CjSearchBar value={search} onChange={setSearch} onClear={() => setSearch("")} />}
 
-      {search.trim().length >= 2 ? (
+      {navCodeId === "civil" ? (
+        <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
+          <IcoScales size={32} color={T.dim} />
+          <h2 style={{ fontFamily: SERIF, fontSize: 24, color: T.text, margin: "20px 0 10px" }}>Code Civil en cours de développement</h2>
+          <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 28px", lineHeight: 1.6 }}>Le code civil sera bientôt disponible avec la même interface interactive.</p>
+          <Btn onClick={() => goCodes()}>Retour aux codes</Btn>
+        </div>
+      ) : search.trim().length >= 2 ? (
         <CjSearchResults
           results={searchResults}
           query={search}
           onSelect={art => { setSearch(""); setNavLivreId(art.livreId); setNavChapitreId(art.chapitreId); setNavArticleNo(art.numero); }}
         />
-      ) : !currentLivre ? (
+      ) : !navCodeId ? (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 20 }}>
+          {CODES.map(code => (
+            <button key={code.id} onClick={() => goCode(code.id)} className="card-sit">
+              <div className="accent" style={{ background: T.navy }} />
+              <div className="ico-wrap"><code.Icon size={28} color={T.navy} /></div>
+              <div>
+                <div style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, marginBottom: 8, lineHeight: 1.3 }}>{code.title}</div>
+                <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.6 }}>{code.desc}</p>
+              </div>
+              <div className="cta">Explorer <IcoArrow size={14} /></div>
+            </button>
+          ))}
+        </div>
+      ) : navCodeId === "judiciaire" && !currentLivre ? (
         <CjLivresGrid onSelect={goLivre} />
-      ) : !currentChapitre ? (
+      ) : navCodeId === "judiciaire" && !currentChapitre ? (
         <>
           <h2 style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, margin: "0 0 20px" }}>
             Livre {currentLivre.numero} — {currentLivre.titre}
           </h2>
           <CjLivreView livre={currentLivre} openTitres={openTitres} onToggleTitre={toggleTitre} onSelectChapitre={goChapitre} />
         </>
-      ) : !currentArticle ? (
+      ) : navCodeId === "judiciaire" && !currentArticle ? (
         <>
           <h2 style={{ fontFamily: SERIF, fontSize: 18, fontWeight: 700, color: T.text, margin: "0 0 20px", lineHeight: 1.4 }}>
             {currentChapitre.chap.titre}
           </h2>
           <CjChapitreView chap={currentChapitre.chap} onSelectArticle={goArticle} />
         </>
-      ) : (
+      ) : navCodeId === "judiciaire" && currentArticle ? (
         <CjArticleView article={currentArticle} prevArt={prevArt} nextArt={nextArt} onNav={goArticle} />
-      )}
+      ) : null}
     </div>
   );
 };
