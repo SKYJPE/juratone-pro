@@ -406,20 +406,21 @@ const GenericPage = ({ setPage }) => (
 export default function JuratonePro() {
   const [page, setPage] = useState("home");
   const situation = SITUATION_MAP[page];
-
   return (
     <div style={{ fontFamily: SANS, background: T.bg, color: T.text, minHeight: "100vh" }}>
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
       <Header setPage={setPage} />
       <main>
-        {page === "home"                        && <HomePage      setPage={setPage} />}
-        {situation                              && <SituationPage {...situation} setPage={setPage} />}
-        {!situation && TOOL_PAGE_IDS.has(page)  && <GenericPage   setPage={setPage} />}
+        {page === "home"                       && <HomePage      setPage={setPage} />}
+        {situation                             && <SituationPage {...situation} setPage={setPage} />}
+        {!situation && TOOL_PAGE_IDS.has(page) && (
+          page === "legislation" ? <LegislationPage setPage={setPage} /> : <GenericPage setPage={setPage} />
+        )}
       </main>
       <Footer />
     </div>
   );
-
+}
 /* ═══════════════════════════════════════════════════════════════
    MONOLITHE 2 — CODE JUDICIAIRE
    Coller après le Monolithe 1. T, SERIF, SANS doivent être définis.
