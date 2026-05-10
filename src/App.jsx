@@ -292,8 +292,9 @@ const RESSOURCES = [
 ];
 
 const CODES = [
-  { id: "civil",     title: "Code Civil",     desc: "Droit civil belge",     Icon: IcoScales },
-  { id: "judiciaire", title: "Code Judiciaire", desc: "Procédure et organisation judiciaire", Icon: IcoGavel },
+  { id: "civil",        title: "Code Civil (1804)",    desc: "Livres I, II, III · Structure classique belge.", Icon: IcoScales },
+  { id: "civil_nouveau", title: "Nouveau Code Civil",   desc: "Réforme 2019+ · Livre 8 La preuve (art. 8.1–8.39).", Icon: IcoScales },
+  { id: "judiciaire",   title: "Code Judiciaire",       desc: "Procédure et organisation judiciaire.", Icon: IcoGavel },
 ];
 
 const TOOL_PAGE_IDS  = new Set(["preavis","immo","succession","routier","indexation","fraisjustice","pension","checklists","juridometre","jurisprudence","doctrine","legislation","guide"]);
@@ -8686,6 +8687,319 @@ const CIVIL_ALL_ARTICLES = (() => {
   }
   return arts;
 })();
+/* ═══════════════════════════════════════════════════════════════
+   NOUVEAU CODE CIVIL — Livre 8 · La preuve (réforme 2019+)
+   Loi du 13 avril 2019 · Art. 8.1 à 8.39
+   Source: JUSTEL / Moniteur belge 27-01-2026
+═══════════════════════════════════════════════════════════════ */
+const CODE_CIVIL_NOUVEAU = {
+  livres: [
+    {
+      id: "NCIV_L08",
+      numero: "8",
+      titre: "La preuve",
+      details: "Art. 8.1 à 8.39",
+      titres: [
+        {
+          id: "NCIV_L08_T02",
+          titre: "Section 1re. Définitions",
+          chapitres: [
+            {
+              id: "NCIV_L08_T02_C01",
+              titre: "Section 1re. Définitions",
+              articles: [
+                { numero: "8.1", texte: "Définitions On entend par : 1° écrit: un ensemble de signes alphabétiques ou de tous autres signes intelligibles apposé sur un support permettant d'y accéder pendant un laps de temps adapté aux fins auxquelles les informations sont destinées et de préserver leur intégrité, quels que soient le support et les modalités de transmission ; 2° signature: un signe ou une suite de signes tracés à la main, par voie électronique ou par un autre procédé, par lesquels une personne s'identifie et manifeste sa volonté ; 3° signature électronique: une signature conforme aux articles 3,10° à 3,12° du Règlement (UE) n° 910/2014 du Parlement européen et du Conseil du 23 juillet 2014 sur l'identification électronique et les services de confiance pour les transactions électroniques au sein du marché intérieur et abrogeant la Directive 1999/93/CE ; 4° acte sous signature privée: un écrit établi en vue de créer des conséquences juridiques, signé par la ou les parties, avec l'intention de s'en approprier le contenu, et qui n'est pas un acte authentique ; 5° acte authentique: un écrit reçu, avec les solennités requises, par un officier public ou ministériel ayant compétence et qualité pour instrumenter ; 6° écrit signé : tout acte authentique ou sous signature privée ; 7° commencement de preuve par écrit: tout écrit qui, émanant de celui qui conteste un acte juridique ou de celui qu'il représente, rend vraisemblable l'acte juridique allégué ; 8° témoignage : une déclaration faite par un tiers dans les conditions des articles 915 et suivants et 961/1 et suivants du Code judiciaire ; 9° présomption de fait: un mode de preuve par lequel le juge déduit l'existence d'un ou plusieurs faits inconnus à partir d'un ou plusieurs faits connus ; 10° aveu: une reconnaissance par une personne ou son représentant spécialement mandaté d'un fait de nature à produire contre elle des conséquences juridiques ; 11° aveu complexe: un aveu assorti de précisions ou réserves qui en neutralisent ou réduisent les conséquences juridiques ; 12° serment: une déclaration solennelle d'une partie devant un juge, par laquelle elle affirme la véracité de ses allégations ; 13° admissibilité: la conformité de la preuve avec les règles du présent livre, qui précisent à quelles conditions un mode de preuve peut constituer la preuve d'un fait contesté ; 14° valeur probante: la mesure dans laquelle un élément de preuve convainc le juge ; 15° force probante: la mesure dans laquelle un mode de preuve fait preuve selon la loi et dans laquelle le juge et les parties sont liés par ce mode de preuve." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T03",
+          titre: "Section 2. Caractère supplétif des règles relatives à la preuve",
+          chapitres: [
+            {
+              id: "NCIV_L08_T03_C01",
+              titre: "Section 2. Caractère supplétif des règles relatives à la preuve",
+              articles: [
+                { numero: "8.2", texte: "Règle générale Sauf les définitions prévues dans le présent livre et hormis les cas où la loi en dispose autrement, toutes les règles du présent livre sont supplétives." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T04",
+          titre: "Section 3. L'objet de la preuve",
+          chapitres: [
+            {
+              id: "NCIV_L08_T04_C01",
+              titre: "Section 3. L'objet de la preuve",
+              articles: [
+                { numero: "8.3", texte: "Règle générale Hormis les cas où la loi en dispose autrement, les faits ou actes juridiques doivent être prouvés lorsqu'ils sont allégués et contestés. Les faits notoires ou les règles d'expérience commune ne doivent pas être prouvés. Le droit, même étranger, ne doit pas être prouvé." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T05",
+          titre: "Section 4. La charge de la preuve",
+          chapitres: [
+            {
+              id: "NCIV_L08_T05_C01",
+              titre: "Section 4. La charge de la preuve",
+              articles: [
+                { numero: "8.4", texte: "Règles déterminant la charge de la preuve Celui qui veut faire valoir une prétention en justice doit prouver les actes juridiques ou faits qui la fondent. Celui qui se prétend libéré doit prouver les actes juridiques ou faits qui soutiennent sa prétention. Toutes les parties doivent collaborer à l'administration de la preuve. En cas de doute, celui qui a la charge de prouver les actes juridiques ou faits allégués par lui succombe au procès, sauf si la loi en dispose autrement. Le juge peut déterminer, par un jugement spécialement motivé, dans des circonstances exceptionnelles, qui supporte la charge de prouver lorsque l'application des règles énoncées aux alinéas précédents serait manifestement déraisonnable. Le juge ne peut faire usage de cette faculté que s'il a ordonné toutes les mesures d'instruction utiles et a veillé à ce que les parties collaborent à l'administration de la preuve, sans pour autant obtenir de preuve suffisante." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T06",
+          titre: "Section 5. Degré de preuve",
+          chapitres: [
+            {
+              id: "NCIV_L08_T06_C01",
+              titre: "Section 5. Degré de preuve",
+              articles: [
+                { numero: "8.5", texte: "Règle générale - preuve certaine Hormis les cas où la loi en dispose autrement, la preuve doit être rapportée avec un degré raisonnable de certitude." },
+                { numero: "8.6", texte: "Preuve par vraisemblance Sans préjudice de l'obligation de toutes les parties de collaborer à l'administration de la preuve, celui qui supporte la charge de la preuve d'un fait négatif peut se contenter d'établir la vraisemblance de ce fait. La même règle vaut pour les faits positifs dont, par la nature même du fait à prouver, il n'est pas possible ou pas raisonnable d'exiger une preuve certaine." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T07",
+          titre: "Section 6. Présomptions légales",
+          chapitres: [
+            {
+              id: "NCIV_L08_T07_C01",
+              titre: "Section 6. Présomptions légales",
+              articles: [
+                { numero: "8.7", texte: "Effet des présomptions légales La présomption légale qu'une loi attache à certains actes juridiques ou faits modifie l'objet de la preuve ou, le cas échéant, dispense celui au profit duquel elle existe d'en rapporter la preuve. La présomption légale peut être renversée sauf : 1° lorsque la loi en dispose autrement ; 2° lorsque cette présomption entraine la nullité d'un acte juridique ; 3° lorsque cette présomption entraine l'irrecevabilité d'une action." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T08",
+          titre: "Section 1re. Dispositions générales",
+          chapitres: [
+            {
+              id: "NCIV_L08_T08_C01",
+              titre: "Section 1re. Dispositions générales",
+              articles: [
+                { numero: "8.8", texte: "Preuve libre Hormis les cas où la loi en dispose autrement, la preuve peut être apportée par tous modes de preuve." },
+                { numero: "8.9", texte: "Preuve réglementée § 1er. L'acte juridique portant sur une somme ou une valeur égale ou supérieure à 3 500,00 euros doit être prouvé par les parties par un écrit signé. Ce montant peut être adapté par arrêté royal délibéré en Conseil des ministres, en fonction de l'évolution du coût de la vie ou des nécessités sociales. Il ne peut être prouvé outre ou contre un écrit signé, même si la somme ou la valeur n'excède pas ce montant, que par un autre écrit signé. § 2. En cas de demande en justice, la valeur à prendre en considération est celle de l'acte juridique qui fonde la demande. § 3. Pour les contrats à exécution successive, la valeur à prendre en considération est la valeur totale des rémunérations des prestations pour une durée maximale d'une année. § 4. Lorsque l'évaluation de l'objet de l'acte juridique est impossible, parce que la valeur n'est ni déterminée ni déterminable lors de la conclusion de l'acte juridique, la preuve peut être rapportée par tous modes de preuve." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T09",
+          titre: "Section 2. Exceptions à la preuve réglementée",
+          chapitres: [
+            {
+              id: "NCIV_L08_T09_C01",
+              titre: "Section 2. Exceptions à la preuve réglementée",
+              articles: [
+                { numero: "8.10", texte: "Preuve des actes juridiques unilatéraux Par dérogation à l'article 8.9 et sous réserve des exceptions prévues par la loi, la preuve d'un acte juridique unilatéral peut être rapportée par tous modes de preuve. La date de l'acte unilatéral est régie par l'article 8.22. La preuve d'un engagement unilatéral de payer par lequel une personne s'engage envers une autre à lui payer une somme d'argent ou à lui livrer une certaine quantité de choses fongibles est soumise à l'article 8.21." },
+                { numero: "8.11", texte: "Preuve par et contre les entreprises § 1er. Contre des entreprises ou entre entreprises, telles que définies à l'article I.1, alinéa 1er, du Code de droit économique, la preuve peut être apportée par tout modes de preuve, sauf exception établie pour des cas particuliers. La règle énoncée à l'alinéa 1er ne s'applique pas aux entreprises lorsqu'elles entendent prouver contre une partie qui n'est pas une entreprise. Les parties qui ne sont pas une entreprise qui souhaitent prouver contre une entreprise peuvent utiliser tous modes de preuve. La règle énoncée à l'alinéa 1er ne s'applique pas non plus, à l'égard des personnes physiques exerçant une entreprise, à la preuve des actes juridiques manifestement étrangers à l'entreprise. § 2. La comptabilité d'une entreprise n'a de force probante contre une autre entreprise que si les mentions de la comptabilité des deux parties sont concordantes. Dans tous les autres cas, le juge apprécie librement la valeur probante de la comptabilité. La comptabilité d'une entreprise n'a pas de force probante contre des personnes qui ne sont pas des entreprises. La comptabilité d'une entreprise peut être invoquée contre cette entreprise. Cette comptabilité ne peut être divisée contre l'entreprise, sauf si elle n'est pas tenue régulièrement. § 3. Le juge peut, sur demande ou d'office, au cours d'un procès ordonner la production de tout ou partie de la comptabilité d'une entreprise concernant le litige à examiner. Le juge peut en outre imposer des mesures afin de garantir la confidentialité des pièces concernées. § 4. Sauf preuve contraire, une facture acceptée par une entreprise ou non contestée dans un délai raisonnable fait preuve contre l'entreprise de l'acte juridique allégué. Une facture non contestée par une personne qui n'est pas une entreprise ne peut être considérée comme acceptée, sauf si cette absence de contestation constitue un silence circonstancié. Une facture acceptée, expressément ou tacitement, par une personne qui n'est pas une entreprise constitue une présomption de fait. Est nulle toute convention qui déroge aux règles du présent alinéa, conclue avant la naissance du litige." },
+                { numero: "8.12", texte: "Impossibilité de prouver Les règles prévues à l'article 8.9 reçoivent exception en cas d'impossibilité matérielle ou morale de se procurer un acte ou s'il est d'usage de ne pas établir un acte. Il en va de même lorsque l'acte a été perdu par force majeure." },
+                { numero: "8.13", texte: "Autres exceptions Par dérogation à l'article 8.9, il peut être suppléé à l'écrit signé par un aveu, un serment décisoire ou un commencement de preuve par écrit, pour autant que ce dernier soit corroboré par un autre mode de preuve." },
+                { numero: "8.14", texte: "Preuve par et contre les tiers Les tiers peuvent rapporter la preuve d'un acte juridique par tous modes de preuve. Sans préjudice de l'article 8.22, la preuve d'un acte juridique peut être rapportée par une partie à l'égard des tiers par tous modes de preuve." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T11",
+          titre: "Sous-section 1re. L'acte authentique",
+          chapitres: [
+            {
+              id: "NCIV_L08_T11_C01",
+              titre: "Sous-section 1re. L'acte authentique",
+              articles: [
+                { numero: "8.15", texte: "Support de l'acte authentique L'acte authentique peut être dressé sur tout support s'il est établi et conservé dans des conditions fixées par la loi ou par le Roi, par arrêté royal délibéré en Conseil des ministres. Toutefois, les actes notariés qui sont reçus sous forme dématérialisée sont établis et conservés conformément à la loi du 16 mars 1803 contenant organisation du notariat. La Banque des actes notariés instituée conformément à cette même loi a la valeur de source authentique pour les actes qui y sont enregistrés. Sans préjudice des conditions prévues à l'alinéa 2, une signature électronique qualifiée, telle que visée à l'article 3, 12° du Règlement UE n° 910/2014 du Parlement européen et du Conseil du 23 juillet 2014 sur l'identification électronique et les services de confiance pour les transactions électroniques au sein du marché intérieur et abrogeant la Directive 1999/93/CE est requise pour les actes authentiques établis, reçus ou signifiés sous forme dématérialisée par un officier public ou ministériel. La qualité du signataire doit toujours pouvoir être vérifiée au moyen d'une banque de données authentique prévue par la loi." },
+                { numero: "8.16", texte: "Acte authentique irrégulier L'acte qui n'est pas authentique du fait de l'incompétence ou de l'incapacité de l'officier public ou ministériel, ou par un défaut de forme, vaut comme écrit sous signature privée, s'il a été signé par la ou les parties." },
+                { numero: "8.17", texte: "Force probante de l'acte authentique L'acte authentique fait foi jusqu'à inscription de faux de ce que l'officier public ou ministériel a personnellement accompli ou constaté, sans possibilité pour les parties d'y déroger. Est nulle toute convention qui déroge à cette règle. En cas d'inscription de faux, le juge peut suspendre l'exécution de l'acte. L'acte authentique fait pleine foi de la convention qu'il renferme entre les parties et à l'égard de leurs héritiers et ayants cause." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T12",
+          titre: "Sous-section 2. L'acte sous signature privée",
+          chapitres: [
+            {
+              id: "NCIV_L08_T12_C01",
+              titre: "Sous-section 2. L'acte sous signature privée",
+              articles: [
+                { numero: "8.18", texte: "Force probante de l'acte sous signature privée L'acte sous signature privée fait foi de la convention qu'il renferme entre ceux qui l'ont signé et à l'égard de leurs héritiers et ayants cause." },
+                { numero: "8.19", texte: "Désaveu d'écriture ou de signature Sauf si la loi en dispose autrement, la partie à laquelle on l'oppose peut toutefois désavouer son écriture ou sa signature. Les héritiers ou ayants cause d'une partie peuvent pareillement désavouer l'écriture ou la signature de leur auteur, ou déclarer qu'ils ne les connaissent pas. Dans ces cas, il y a lieu à vérification d'écriture, conformément aux articles 883 et suivants du Code judiciaire." },
+                { numero: "8.20", texte: "Nombre d'originaux requis pour un acte sous signature privée L'acte sous signature privée qui constate un contrat synallagmatique ne fait preuve que s'il a été fait en autant d'originaux qu'il y a de parties ayant un intérêt distinct. Chaque original doit mentionner le nombre des originaux qui en ont été faits. Celui qui a exécuté le contrat, même partiellement, ne peut opposer le défaut d'un nombre suffisant d'originaux ou de la mention de leur nombre. L'exigence d'une pluralité d'originaux est réputée satisfaite pour les contrats sous forme électronique lorsque l'écrit est établi conformément à l'article 8.1, 1°, et que le procédé permet à chaque partie de disposer d'un exemplaire écrit ou d'y avoir accès. Lorsqu'un acte sous signature privée est nul pour défaut de respect des règles prévues aux deux premiers alinéas du présent article, il peut valoir comme commencement de preuve par écrit, s'il remplit les conditions visées à l'article 8.1, 7° du présent livre. Les règles prévues aux deux premiers alinéas ne s'appliquent pas aux contrats formés par échange de courrier, que celui-ci soit adressé par voie postale ou électronique." },
+                { numero: "8.21", texte: "Engagement unilatéral de payer Quelle que soit la valeur de l'acte juridique et sans préjudice des exceptions prévues par la loi, l'engagement unilatéral de payer une somme d'argent ou de livrer une certaine quantité de choses fongibles ne fait preuve que si elle comporte la signature de celui qui souscrit cet engagement ainsi que la mention, écrite par lui-même, de la somme ou de la quantité en toutes lettres. Est nulle toute convention dérogeant à cette règle." },
+                { numero: "8.22", texte: "Date certaine de l'acte sous signature privée L'acte sous signature privée n'acquiert date certaine à l'égard des tiers que : 1° du jour où il a été enregistré, ou 2° du jour où sa substance est constatée dans un acte authentique, ou 3° du jour où au moins l'une des parties se trouve dans l'incapacité de modifier l'acte ou sa date, notamment suite au décès de l'une d'elles." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T13",
+          titre: "Sous-section 3. Acte sous signature privée contresigné par les avocats des parties",
+          chapitres: [
+            {
+              id: "NCIV_L08_T13_C01",
+              titre: "Sous-section 3. Acte sous signature privée contresigné par les avocats des parties",
+              articles: [
+                { numero: "8.23", texte: "Conditions et force probante de l'acte sous signature privée contresigné par les avocats des parties L'acte sous signature privée contresigné par les avocats conformément aux dispositions de la présente sous-" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T15",
+          titre: "Sous-section 4. Autres écrits",
+          chapitres: [
+            {
+              id: "NCIV_L08_T15_C01",
+              titre: "Sous-section 4. Autres écrits",
+              articles: [
+                { numero: "8.24", texte: "Mention du paiement sur un acte ou son double La mention d'un paiement ou d'une autre cause de libération portée par le créancier sur un acte original qui est toujours resté en sa possession vaut présomption simple de libération du débiteur. Il en est de même de la mention portée sur le double d'un acte, pourvu que ce double soit entre les mains du débiteur." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T16",
+          titre: "Sous-section 5. Les copies",
+          chapitres: [
+            {
+              id: "NCIV_L08_T16_C01",
+              titre: "Sous-section 5. Les copies",
+              articles: [
+                { numero: "8.25", texte: "Statut juridique des copies La copie réalisée au moyen d'un service d'archivage électronique qualifié conforme au livre XII, titre 2, du Code de droit économique a la même force probante que l'écrit sous signature privée, dont elle est présumée, sauf preuve contraire, être une copie fidèle et durable. La présentation de l'original n'est pas exigée. La copie certifiée réalisée conformément à l'article 1er, alinéa 4, de la loi du 16 mars 1803 contenant organisation du notariat ou conformément à l'article 126 de la nouvelle loi communale a la même force probante que l'écrit dont elle est présumée, jusqu'à inscription de faux, être une copie fidèle et durable. La présentation de l'original n'est pas exigée. Hormis les cas où la loi en dispose autrement, dans tous les autres cas, la copie constitue une présomption de fait ou, le cas échéant, un commencement de preuve par écrit lorsque les conditions imposées par l'article 8.1, 7° sont réunies. Si l'original subsiste, sa présentation peut toujours être exigée." },
+                { numero: "8.26", texte: "Copies d'actes authentiques § 1er. Les copies des actes authentiques sont soumises aux règles suivantes. Lorsque l'acte original n'existe plus, les copies font foi d'après les distinctions suivantes : 1° les grosses ou premières expéditions ont la même force probante que l'original. Il en est de même des copies dématérialisées des actes notariés qui sont réalisés conformément à l'article 13, alinéa 1er, de la loi du 16 mars 1803 contenant organisation du notariat et dont, conformément à l'article 18 de ladite loi, une copie est conservée dans la Banque des actes notariés. Il en est de même également des copies qui ont été délivrées par un juge, en application des articles 1372 et suivants du Code judiciaire, en présence des parties ou celles-ci étant dûment appelées, ou des copies qui ont été délivrées en présence des parties et de leur consentement réciproque ; 2° les copies qui, sans intervention d'un juge ou sans le consentement des parties, et depuis la délivrance des grosses ou premières expéditions, auront été délivrées sur la minute de l'acte par le notaire qui l'a reçu, ou par l'un de ses successeurs, ou par les officiers publics ou ministériels qui, en cette qualité, sont dépositaires des minutes, peuvent, en cas de perte de l'original, faire foi quand elles sont anciennes. Elles sont considérées comme anciennes quand elles ont plus de trente ans. Si elles ont moins de trente ans, elles ne peuvent servir que de commencement de preuve par écrit ; 3° lorsque les copies délivrées sur la minute de l'acte ne l'auront pas été par le notaire qui l'a reçu, ou par l'un de ses successeurs, ou par les officiers publics ou ministériels qui, en cette qualité, sont dépositaires des minutes, elles ne pourront servir, quelle que soit leur ancienneté, que de commencement de preuve par écrit ; 4° les copies de copies pourront, suivant les circonstances, être considérées comme simples renseignements. § 2. La transcription d'un acte sur les registres publics ne pourra servir que de commencement de preuve par écrit ; et il faudra même pour cela : 1° qu'il soit constant que toutes les minutes du notaire, de l'année dans laquelle l'acte parait avoir été fait, soient perdues, ou que l'on prouve que la perte de la minute de cet acte a été faite par un accident particulier ; 2° qu'il existe un répertoire régulièrement tenu du notaire, qui constate que l'acte a été fait à la même date. Lorsque ces deux conditions sont remplies, la preuve du contenu de l'acte peut être rapportée par tous modes de preuve. Si la preuve par témoins est admise, il est nécessaire que ceux qui ont été témoins de l'acte, s'ils vivent encore, soient entendus." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T17",
+          titre: "Sous-section 6. Remise de l'acte par le créancier au débiteur",
+          chapitres: [
+            {
+              id: "NCIV_L08_T17_C01",
+              titre: "Sous-section 6. Remise de l'acte par le créancier au débiteur",
+              articles: [
+                { numero: "8.27", texte: "Remise volontaire de l'acte par le créancier au débiteur La remise volontaire au débiteur de l'acte sous signature privée ou de la grosse qui fait titre de la dette fait présumer sa libération, sauf preuve contraire." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T18",
+          titre: "Section 2. La preuve par témoins",
+          chapitres: [
+            {
+              id: "NCIV_L08_T18_C01",
+              titre: "Section 2. La preuve par témoins",
+              articles: [
+                { numero: "8.28", texte: "Admissibilité et valeur probante des témoignages Les témoignages ne peuvent être admis que lorsque la loi admet la preuve par tous modes de preuve. Leur valeur probante est laissée à l'appréciation du juge." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T19",
+          titre: "Section 3. La preuve par présomptions de fait",
+          chapitres: [
+            {
+              id: "NCIV_L08_T19_C01",
+              titre: "Section 3. La preuve par présomptions de fait",
+              articles: [
+                { numero: "8.29", texte: "Admissibilité et valeur probante des présomptions de fait Les présomptions de fait ne peuvent être admises que dans les cas où la loi admet la preuve par tous modes de preuve. Leur valeur probante est laissée à l'appréciation du juge, qui ne doit les retenir que si elles reposent sur un ou plusieurs indices sérieux et précis. Lorsque la présomption s'appuie sur plusieurs indices, ceux-ci doivent être concordants." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T20",
+          titre: "Section 4. L'aveu",
+          chapitres: [
+            {
+              id: "NCIV_L08_T20_C01",
+              titre: "Section 4. L'aveu",
+              articles: [
+                { numero: "8.30", texte: "Caractéristiques de l'aveu L'aveu, qu'il soit intentionnel ou non, peut être judiciaire ou extrajudiciaire, exprès ou tacite." },
+                { numero: "8.31", texte: "Aveu extrajudiciaire L'aveu extrajudiciaire purement verbal n'est admis que dans les cas où la loi permet la preuve par tous modes de preuve. L'aveu extrajudiciaire peut résulter du comportement d'une des parties, tel que l'exécution d'un contrat. Ce comportement peut être établi par tous modes de preuve. L'aveu extrajudiciaire a la même force probante que l'aveu judiciaire." },
+                { numero: "8.32", texte: "Force probante de l'aveu L'aveu est irrévocable, sauf erreur de fait, ou toute autre cause de nullité. Il fait foi contre son auteur, sauf s'il n'est pas sincère. L'aveu complexe est indivisible, sauf si l'une de ses branches est fausse, invraisemblable ou en contradiction avec l'autre branche. Dans ce cas, chaque branche peut être invoquée indépendamment de l'autre." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T21",
+          titre: "Section 5. Le serment",
+          chapitres: [
+            {
+              id: "NCIV_L08_T21_C01",
+              titre: "Section 5. Le serment",
+              articles: [
+                { numero: "8.33", texte: "Différents types de serment Le serment peut être déféré, à titre décisoire, par une partie à l'autre pour en faire dépendre le jugement de la cause. Il peut aussi être déféré d'office par le juge à l'une des parties." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T22",
+          titre: "Sous-section 1re. Le serment décisoire",
+          chapitres: [
+            {
+              id: "NCIV_L08_T22_C01",
+              titre: "Sous-section 1re. Le serment décisoire",
+              articles: [
+                { numero: "8.34", texte: "Régime juridique Le serment décisoire peut être déféré sur quelque espèce de contestation que ce soit et en tout état de cause. Celui à qui le serment est déféré et qui le refuse ou ne veut pas le référer, ou celui à qui il a été référé et qui le refuse, succombe dans sa prétention." },
+                { numero: "8.35", texte: "Champ d'application Il ne peut être déféré que sur un fait personnel à la partie à laquelle on le défère. Il peut être référé par celle-ci, à moins que le fait qui en est l'objet ne lui soit purement personnel." },
+                { numero: "8.36", texte: "Caractère définitif La partie qui a déféré ou référé le serment ne peut plus se rétracter lorsque l'autre partie a déclaré qu'elle est prête à faire ce serment." },
+                { numero: "8.37", texte: "Force probante Le serment ne fait preuve qu'au profit de celui qui l'a déféré et de ses héritiers et ayants cause, ou contre eux. Le serment déféré par l'un des créanciers solidaires au débiteur ne libère celui-ci que pour la part de ce créancier. Le serment déféré au débiteur principal libère également les cautions. Le serment déféré à l'un des débiteurs solidaires profite aux codébiteurs. Le serment déféré à la caution profite au débiteur principal. Dans ces deux derniers cas, le serment du codébiteur solidaire ou de la caution ne profite aux autres codébiteurs ou au débiteur principal que lorsqu'il a été déféré sur la dette principale, et non sur le fait de la solidarité ou du cautionnement." },
+              ],
+            },
+          ],
+        },
+        {
+          id: "NCIV_L08_T23",
+          titre: "Sous-section 2. Le serment déféré d'office",
+          chapitres: [
+            {
+              id: "NCIV_L08_T23_C01",
+              titre: "Sous-section 2. Le serment déféré d'office",
+              articles: [
+                { numero: "8.38", texte: "Valeur probante Le juge peut d'office déférer le serment à l'une des parties. Ce serment ne peut être référé à l'autre partie. Sa valeur probante est laissée à l'appréciation du juge." },
+                { numero: "8.39", texte: "Champ d'application Le juge ne peut déférer d'office le serment, soit sur la demande, soit sur l'exception qui y est opposée, que si la demande ou l'exception n'est pas complètement prouvée ou n'est pas totalement dénuée de preuves.\"." },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const CIVIL_NOUVEAU_MAP      = Object.fromEntries(CODE_CIVIL_NOUVEAU.livres.map(l => [l.id, l]));
+
+const CIVIL_NOUVEAU_ARTICLES = (() => {
+  const arts = [];
+  for (const livre of CODE_CIVIL_NOUVEAU.livres) {
+    for (const titre of livre.titres) {
+      for (const chap of titre.chapitres) {
+        for (const art of chap.articles) {
+          arts.push({ ...art, livreId: livre.id, livreNumero: livre.numero,
+            livreTitre: livre.titre, titreTitre: titre.titre, chapitreId: chap.id, chapitreTitre: chap.titre });
+        }
+      }
+    }
+  }
+  return arts;
+})();
 
 /* ═══════════════════════════════════════════════════════════════
    MONOLITHE 2 — CODE JUDICIAIRE
@@ -8931,9 +9245,14 @@ const LegislationPage = ({ setPage }) => {
   const [openTitres,    setOpenTitres]    = useState(new Set());
   const [search,        setSearch]        = useState("");
 
-  const isCivil = navCodeId === "civil";
-  const activeMap      = isCivil ? CIVIL_LIVRE_MAP : LIVRE_MAP;
-  const activeArticles = isCivil ? CIVIL_ALL_ARTICLES : ALL_ARTICLES;
+  const activeMap =
+    navCodeId === "civil"        ? CIVIL_LIVRE_MAP :
+    navCodeId === "civil_nouveau" ? CIVIL_NOUVEAU_MAP :
+    LIVRE_MAP;
+  const activeArticles =
+    navCodeId === "civil"        ? CIVIL_ALL_ARTICLES :
+    navCodeId === "civil_nouveau" ? CIVIL_NOUVEAU_ARTICLES :
+    ALL_ARTICLES;
 
   const goCodes    = () => { setNavCodeId(null); setNavLivreId(null); setNavChapitreId(null); setNavArticleNo(null); };
   const goCode     = (id) => {
@@ -8941,6 +9260,8 @@ const LegislationPage = ({ setPage }) => {
     if (id === "judiciaire") {
       const first = LIVRE_MAP["L00"]?.titres[0];
       if (first) setOpenTitres(new Set([first.id]));
+    } else {
+      setOpenTitres(new Set());
     }
   };
   const goLivres   = () => { setNavLivreId(null); setNavChapitreId(null); setNavArticleNo(null); };
@@ -9001,7 +9322,7 @@ const LegislationPage = ({ setPage }) => {
             {currentCode ? currentCode.title : "Législation"}
           </h1>
           <p style={{ fontFamily: SANS, fontSize: 12, color: T.muted, margin: 0 }}>
-            {currentCode ? (currentCode.id === "judiciaire" ? "Loi du 10 octobre 1967 · Belgique" : "Loi du 21 mars 1804 · Belgique") : "Codes juridiques belges"}
+            {currentCode ? (currentCode.id === "judiciaire" ? "Loi du 10 octobre 1967 · Belgique" : currentCode.id === "civil_nouveau" ? "Loi du 13 avril 2019 · Belgique" : "Loi du 21 mars 1804 · Belgique") : "Codes juridiques belges"}
           </p>
         </div>
       </div>
@@ -9028,7 +9349,7 @@ const LegislationPage = ({ setPage }) => {
               ))}
             </div>
           );
-        } else if (navCodeId === "judiciaire" || navCodeId === "civil") {
+        } else if (navCodeId === "judiciaire" || navCodeId === "civil" || navCodeId === "civil_nouveau") {
           if (!currentLivre) {
             return <CjLivresGrid livres={Object.values(activeMap)} onSelect={goLivre} />;
           } else if (!currentChapitre) {
