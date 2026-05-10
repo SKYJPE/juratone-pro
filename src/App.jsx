@@ -4,88 +4,144 @@ import { useState } from "react";
    BLOC 1 — THÈME & STYLES GLOBAUX
 ═══════════════════════════════════════════════════════════════ */
 const T = {
-  bg:          "#F8F7F3",
-  surface:     "#FFFFFF",
-  s2:          "#F2F1ED",
-  s3:          "#E7E6E1",
-  border:      "rgba(14,13,11,0.08)",
-  borderHover: "rgba(14,13,11,0.16)",
-  navy:        "#1B2D4F",
-  navyHover:   "#243D6B",
-  navyLight:   "#EDF2FA",
-  navyDim:     "rgba(27,45,79,0.07)",
-  navyGrd:     "linear-gradient(140deg,#2A4A82 0%,#1B2D4F 55%,#111D33 100%)",
-  gold:        "#9A6F2F",
-  goldLight:   "#FAF4EA",
-  text:        "#0E0D0B",
-  muted:       "#57534A",
-  dim:         "#9B978F",
-  green:       "#166534",
-  greenLight:  "#ECFDF5",
-  orange:      "#92400E",
-  orangeLight: "#FFFBEB",
-  sh1: "0 1px 2px rgba(14,13,11,0.04),0 0 1px rgba(14,13,11,0.02)",
-  sh2: "0 2px 8px rgba(14,13,11,0.06),0 1px 2px rgba(14,13,11,0.03)",
-  sh3: "0 4px 16px rgba(14,13,11,0.08),0 2px 4px rgba(14,13,11,0.04)",
-  sh4: "0 8px 32px rgba(14,13,11,0.11),0 3px 8px rgba(14,13,11,0.05)",
-  sh5: "0 16px 48px rgba(14,13,11,0.14),0 6px 14px rgba(14,13,11,0.06)",
+  bg:          "#F6F4EF",
+  surface:     "rgba(255,255,255,0.70)",
+  s2:          "rgba(255,255,255,0.45)",
+  s3:          "rgba(10,10,10,0.04)",
+  border:      "rgba(255,255,255,0.75)",
+  borderHover: "rgba(255,255,255,0.95)",
+  navy:        "#0A0A0A",
+  navyHover:   "#2A2A2A",
+  navyLight:   "rgba(10,10,10,0.05)",
+  navyDim:     "rgba(10,10,10,0.04)",
+  navyGrd:     "linear-gradient(135deg,#1A1A1A 0%,#0A0A0A 100%)",
+  gold:        "#7A6048",
+  goldLight:   "rgba(255,240,200,0.35)",
+  text:        "#0A0A0A",
+  muted:       "rgba(10,10,10,0.48)",
+  dim:         "rgba(10,10,10,0.28)",
+  green:       "#1A5C3A",
+  greenLight:  "rgba(200,240,220,0.40)",
+  orange:      "#8A4010",
+  orangeLight: "rgba(255,220,190,0.40)",
+  sh1: "0 2px 8px rgba(10,10,10,0.04), 0 1px 0 rgba(255,255,255,0.8) inset",
+  sh2: "0 4px 16px rgba(10,10,10,0.06), 0 1px 0 rgba(255,255,255,0.85) inset",
+  sh3: "0 8px 32px rgba(10,10,10,0.08), 0 1px 0 rgba(255,255,255,0.9) inset",
+  sh4: "0 16px 48px rgba(10,10,10,0.10), 0 1px 0 rgba(255,255,255,0.95) inset",
+  sh5: "0 24px 64px rgba(10,10,10,0.13), 0 1px 0 rgba(255,255,255,1.0) inset",
+  glass: "backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%)",
 };
-const SERIF = "'Lora','Georgia',serif";
-const SANS  = "'DM Sans',system-ui,sans-serif";
+const SERIF = "'DM Serif Display','Georgia',serif";
+const SANS  = "'Inter',system-ui,sans-serif";
 
 const GLOBAL_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
   *, *::before, *::after { box-sizing: border-box; }
   body { margin: 0; background: ${T.bg}; }
-  ::selection { background: ${T.navyLight}; color: ${T.navy}; }
+  ::selection { background: rgba(10,10,10,0.08); color: ${T.navy}; }
 
+  /* ── Blobs ambiants ── */
+  .bg-blobs {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .blob-1 {
+    top: -15%; left: -8%; width: 55vw; height: 55vw; max-width: 700px; max-height: 700px;
+    background: radial-gradient(circle, rgba(180,195,255,0.22) 0%, transparent 70%);
+  }
+  .blob-2 {
+    bottom: 5%; right: -5%; width: 45vw; height: 45vw; max-width: 580px; max-height: 580px;
+    background: radial-gradient(circle, rgba(255,215,160,0.18) 0%, transparent 70%);
+  }
+  .blob-3 {
+    top: 40%; left: 30%; width: 35vw; height: 35vw; max-width: 420px; max-height: 420px;
+    background: radial-gradient(circle, rgba(190,240,210,0.12) 0%, transparent 70%);
+  }
+  .page-wrap { position: relative; z-index: 1; }
+
+  /* ── Cartes glass ── */
   .card-sit {
-    background: ${T.surface}; border: 1px solid ${T.border}; border-radius: 16px;
-    padding: 32px 28px; cursor: pointer; box-shadow: ${T.sh2}; transform: translateY(0);
-    transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
-    display: flex; flex-direction: column; gap: 16px;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.80); border-radius: 22px;
+    padding: 32px 28px; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(10,10,10,0.06), 0 1px 0 rgba(255,255,255,0.9) inset;
+    transform: translateY(0);
+    transition: box-shadow .3s ease, transform .3s ease, background .3s ease, border-color .3s ease;
+    display: flex; flex-direction: column; gap: 18px;
     position: relative; overflow: hidden;
     text-align: left; width: 100%; appearance: none; -webkit-appearance: none; font-family: inherit;
   }
-  .card-sit:hover { border-color: ${T.borderHover}; box-shadow: ${T.sh4}; transform: translateY(-4px); }
-  .card-sit .accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity .25s; }
+  .card-sit:hover {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(255,255,255,0.95);
+    box-shadow: 0 12px 48px rgba(10,10,10,0.10), 0 1px 0 rgba(255,255,255,1) inset;
+    transform: translateY(-5px);
+  }
+  .card-sit .accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity .3s; border-radius: 22px 22px 0 0; }
   .card-sit:hover .accent { opacity: 1; }
-  .card-sit .ico-wrap { width: 56px; height: 56px; border-radius: 14px; background: ${T.navyLight}; display: flex; align-items: center; justify-content: center; transition: background .25s; flex-shrink: 0; }
-  .card-sit:hover .ico-wrap { background: ${T.navyDim}; }
-  .card-sit .cta { display: flex; align-items: center; gap: 6px; font-family: ${SANS}; font-size: 13px; font-weight: 700; color: ${T.navy}; margin-top: auto; padding-top: 8px; transition: color .2s; }
-  .card-sit:hover .cta { color: ${T.navyHover}; }
+  .card-sit .ico-wrap {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(10,10,10,0.05);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s; flex-shrink: 0;
+  }
+  .card-sit:hover .ico-wrap { background: rgba(10,10,10,0.08); }
+  .card-sit .cta { display: flex; align-items: center; gap: 6px; font-family: ${SANS}; font-size: 12px; font-weight: 600; color: ${T.navy}; margin-top: auto; padding-top: 4px; opacity: 0.55; transition: opacity .2s; letter-spacing: 0.3px; }
+  .card-sit:hover .cta { opacity: 1; }
 
   .card-tool {
-    background: ${T.surface}; border: 1px solid ${T.border}; border-radius: 12px;
-    padding: 18px 20px; cursor: pointer; box-shadow: ${T.sh1}; transform: translateY(0);
-    transition: box-shadow .2s, transform .2s, border-color .2s;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.75); border-radius: 16px;
+    padding: 18px 20px; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(10,10,10,0.05), 0 1px 0 rgba(255,255,255,0.85) inset;
+    transform: translateY(0);
+    transition: box-shadow .25s, transform .25s, background .25s;
     text-align: left; width: 100%; appearance: none; -webkit-appearance: none; font-family: inherit;
   }
-  .card-tool:hover { border-color: ${T.borderHover}; box-shadow: ${T.sh3}; transform: translateY(-2px); }
+  .card-tool:hover {
+    background: rgba(255,255,255,0.80);
+    box-shadow: 0 8px 28px rgba(10,10,10,0.08), 0 1px 0 rgba(255,255,255,0.95) inset;
+    transform: translateY(-2px);
+  }
 
   .card-res {
-    background: ${T.surface}; border: 1px solid ${T.border}; border-left: 3px solid ${T.navy};
-    border-radius: 12px; padding: 24px; cursor: pointer; box-shadow: ${T.sh1};
-    transition: box-shadow .2s, border-color .2s;
+    background: transparent; border: none; border-bottom: 1px solid rgba(10,10,10,0.07);
+    border-radius: 0; padding: 24px 8px; cursor: pointer;
+    transition: background .2s, padding-left .2s;
     text-align: left; width: 100%; appearance: none; -webkit-appearance: none; font-family: inherit;
+    display: flex; align-items: center; justify-content: space-between;
   }
-  .card-res:hover { border-top-color: ${T.borderHover}; border-right-color: ${T.borderHover}; border-bottom-color: ${T.borderHover}; box-shadow: ${T.sh3}; }
+  .card-res:first-child { border-top: 1px solid rgba(10,10,10,0.07); }
+  .card-res:hover { background: rgba(255,255,255,0.50); padding-left: 20px; border-radius: 12px; }
 
-  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: ${SANS}; font-weight: 600; border-radius: 10px; cursor: pointer; transition: box-shadow .2s, background .2s; letter-spacing: .2px; white-space: nowrap; }
-  .btn-sm  { padding: 7px 14px;  font-size: 12px; }
-  .btn-md  { padding: 10px 20px; font-size: 14px; }
-  .btn-lg  { padding: 13px 26px; font-size: 15px; }
-  .btn-primary { background: ${T.navyGrd}; color: #fff; border: none; box-shadow: ${T.sh2}; }
-  .btn-primary:hover { background: linear-gradient(140deg,#334E8A 0%,#243D6B 55%,#162540 100%); box-shadow: ${T.sh4}; }
-  .btn-outline { background: transparent; color: ${T.navy}; border: 1px solid ${T.navy}55; }
-  .btn-outline:hover { background: ${T.navyDim}; }
-  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.25); }
-  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  /* ── Boutons ── */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: ${SANS}; font-weight: 500; border-radius: 100px; cursor: pointer; transition: all .25s ease; letter-spacing: .1px; white-space: nowrap; }
+  .btn-sm  { padding: 7px 16px;  font-size: 12px; }
+  .btn-md  { padding: 11px 22px; font-size: 13px; }
+  .btn-lg  { padding: 14px 30px; font-size: 14px; }
+  .btn-primary {
+    background: ${T.navy}; color: #fff; border: none;
+    box-shadow: 0 2px 12px rgba(10,10,10,0.20);
+  }
+  .btn-primary:hover { background: ${T.navyHover}; box-shadow: 0 6px 24px rgba(10,10,10,0.28); transform: translateY(-1px); }
+  .btn-outline {
+    background: rgba(255,255,255,0.60);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    color: ${T.navy}; border: 1px solid rgba(10,10,10,0.14);
+    box-shadow: 0 2px 8px rgba(10,10,10,0.04), 0 1px 0 rgba(255,255,255,0.8) inset;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.85); box-shadow: 0 4px 16px rgba(10,10,10,0.08), 0 1px 0 rgba(255,255,255,0.95) inset; }
+  .btn-ghost { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(12px); }
+  .btn-ghost:hover { background: rgba(255,255,255,.22); }
 
-  .nav-link { font-family: ${SANS}; font-size: 13px; font-weight: 500; color: ${T.muted}; background: none; border: none; cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: color .15s, background .15s; }
-  .nav-link:hover { color: ${T.navy}; background: ${T.navyDim}; }
+  /* ── Nav ── */
+  .nav-link { font-family: ${SANS}; font-size: 13px; font-weight: 400; color: ${T.muted}; background: none; border: none; cursor: pointer; padding: 6px 14px; border-radius: 100px; transition: color .15s, background .15s; }
+  .nav-link:hover { color: ${T.navy}; background: rgba(10,10,10,0.05); }
 
-  .btn-back { font-family: ${SANS}; font-size: 13px; color: ${T.muted}; background: none; border: none; cursor: pointer; padding: 0 0 36px; display: flex; align-items: center; gap: 6px; transition: color .15s; }
+  .btn-back { font-family: ${SANS}; font-size: 12px; color: ${T.muted}; background: none; border: none; cursor: pointer; padding: 0 0 36px; display: flex; align-items: center; gap: 6px; transition: color .15s; letter-spacing: 0.2px; }
   .btn-back:hover { color: ${T.navy}; }
   .logo-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 10px; }
 `;
@@ -143,16 +199,22 @@ const Btn = ({ children, onClick, variant = "primary", size = "md", icon }) => (
 );
 
 const BADGE_COLORS = {
-  navy:   { background: T.navyLight,   color: T.navy },
-  gold:   { background: T.goldLight,   color: T.gold },
-  green:  { background: T.greenLight,  color: T.green },
-  gray:   { background: T.s2,          color: T.muted },
-  orange: { background: T.orangeLight, color: T.orange },
+  navy:   { background: "rgba(10,10,10,0.06)",   color: "rgba(10,10,10,0.65)" },
+  gold:   { background: "rgba(255,215,100,0.18)", color: "#7A6048" },
+  green:  { background: "rgba(180,240,200,0.28)", color: "#1A5C3A" },
+  gray:   { background: "rgba(10,10,10,0.04)",    color: T.muted },
+  orange: { background: "rgba(255,180,100,0.18)", color: "#8A4010" },
 };
 const Badge = ({ children, color = "navy" }) => {
   const s = BADGE_COLORS[color] ?? BADGE_COLORS.navy;
   return (
-    <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: 100, fontSize: 11, fontFamily: SANS, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", background: s.background, color: s.color }}>
+    <span style={{
+      display: "inline-block", padding: "3px 10px", borderRadius: 100,
+      fontSize: 10, fontFamily: SANS, fontWeight: 600, letterSpacing: 1.2,
+      textTransform: "uppercase",
+      background: s.background, color: s.color,
+      border: "1px solid rgba(255,255,255,0.5)"
+    }}>
       {children}
     </span>
   );
@@ -220,28 +282,33 @@ const SITUATION_MAP  = Object.fromEntries(SITUATIONS.map(s => [s.id, s]));
 const SituationCard = ({ number, Icon, title, desc, onClick, accent }) => (
   <button onClick={onClick} className="card-sit">
     <div className="accent" style={{ background: accent || T.navy }} />
-    <div style={{ fontFamily: SANS, fontSize: 11, fontWeight: 800, color: T.dim, letterSpacing: 1, textAlign: "right" }}>{number}</div>
-    <div className="ico-wrap"><Icon size={28} color={T.navy} /></div>
-    <div>
-      <div style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 700, color: T.text, marginBottom: 8, lineHeight: 1.3 }}>{title}</div>
-      <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.6 }}>{desc}</p>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+      <div className="ico-wrap"><Icon size={24} color={T.navy} /></div>
+      <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 500, color: T.dim, letterSpacing: 1.5 }}>{number}</span>
     </div>
-    <div className="cta">Commencer <IcoArrow size={14} /></div>
+    <div>
+      <div style={{ fontFamily: SERIF, fontSize: 21, fontWeight: 400, color: T.text, marginBottom: 8, lineHeight: 1.25, letterSpacing: -0.2 }}>{title}</div>
+      <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.65, fontWeight: 300 }}>{desc}</p>
+    </div>
+    <div className="cta">Commencer <IcoArrow size={12} /></div>
   </button>
 );
 
 const ToolCard = ({ title, desc, onClick }) => (
   <button onClick={onClick} className="card-tool">
-    <div style={{ fontFamily: SANS, fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 4 }}>{title}</div>
-    <div style={{ fontFamily: SANS, fontSize: 12, color: T.muted, lineHeight: 1.5 }}>{desc}</div>
+    <div style={{ fontFamily: SANS, fontSize: 13, fontWeight: 500, color: T.text, marginBottom: 4, letterSpacing: -0.1 }}>{title}</div>
+    <div style={{ fontFamily: SANS, fontSize: 11, color: T.muted, lineHeight: 1.55, fontWeight: 300 }}>{desc}</div>
   </button>
 );
 
 const ResourceCard = ({ cat, title, desc, onClick }) => (
   <button onClick={onClick} className="card-res">
-    <Badge color="navy">{cat}</Badge>
-    <div style={{ fontFamily: SERIF, fontSize: 18, fontWeight: 700, color: T.text, margin: "12px 0 8px" }}>{title}</div>
-    <p style={{ fontFamily: SANS, fontSize: 13, color: T.muted, margin: 0, lineHeight: 1.6 }}>{desc}</p>
+    <div>
+      <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: T.dim, letterSpacing: 2.5, textTransform: "uppercase", marginBottom: 6 }}>{cat}</div>
+      <div style={{ fontFamily: SERIF, fontSize: 20, fontWeight: 400, color: T.text, letterSpacing: -0.2 }}>{title}</div>
+      <p style={{ fontFamily: SANS, fontSize: 12, color: T.muted, margin: "6px 0 0", lineHeight: 1.6, fontWeight: 300 }}>{desc}</p>
+    </div>
+    <IcoArrow size={14} color={T.dim} />
   </button>
 );
 
@@ -259,33 +326,45 @@ const BackButton = ({ setPage }) => (
   </button>
 );
 
-const Section = ({ id, bg = T.surface, children }) => (
-  <section id={id} style={{ background: bg, padding: "80px 0" }}>
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px" }}>{children}</div>
+const Section = ({ id, children }) => (
+  <section id={id} style={{ padding: "96px 0" }}>
+    <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>{children}</div>
   </section>
 );
 
-const SectionHeader = ({ eyebrow, title, subtitle, mb = 40 }) => (
+const SectionHeader = ({ eyebrow, title, subtitle, mb = 48 }) => (
   <div style={{ marginBottom: mb }}>
-    {eyebrow && <p style={{ fontFamily: SANS, fontSize: 11, fontWeight: 800, color: T.dim, letterSpacing: 2.5, textTransform: "uppercase", margin: "0 0 12px" }}>{eyebrow}</p>}
-    <h2 style={{ fontFamily: SERIF, fontSize: 32, fontWeight: 700, color: T.text, margin: "0 0 10px" }}>{title}</h2>
-    {subtitle && <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: 0 }}>{subtitle}</p>}
+    {eyebrow && <p style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: T.dim, letterSpacing: 3, textTransform: "uppercase", margin: "0 0 16px" }}>{eyebrow}</p>}
+    <h2 style={{ fontFamily: SERIF, fontSize: "clamp(28px,3.5vw,40px)", fontWeight: 400, color: T.text, margin: "0 0 12px", lineHeight: 1.15, letterSpacing: -0.5 }}>{title}</h2>
+    {subtitle && <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: 0, lineHeight: 1.7, maxWidth: 520, fontWeight: 300 }}>{subtitle}</p>}
   </div>
 );
 
 const Header = ({ setPage }) => (
-  <header style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(248,247,243,0.94)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${T.border}`, boxShadow: T.sh1 }}>
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+  <header style={{
+    position: "sticky", top: 0, zIndex: 100,
+    background: "rgba(246,244,239,0.72)",
+    backdropFilter: "blur(28px) saturate(200%)",
+    WebkitBackdropFilter: "blur(28px) saturate(200%)",
+    borderBottom: "1px solid rgba(255,255,255,0.70)",
+    boxShadow: "0 1px 24px rgba(10,10,10,0.04)"
+  }}>
+    <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <button className="logo-btn" onClick={() => setPage("home")} aria-label="Juratone Pro — Accueil">
-        <div style={{ width: 36, height: 36, borderRadius: 9, background: T.navyGrd, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: T.sh2 }}>
-          <span style={{ fontFamily: SERIF, fontSize: 14, fontWeight: 700, color: "#fff", letterSpacing: -0.5 }}>JT</span>
+        <div style={{
+          width: 34, height: 34, borderRadius: 10,
+          background: T.navyGrd,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: "0 2px 8px rgba(10,10,10,0.22)"
+        }}>
+          <span style={{ fontFamily: SERIF, fontSize: 13, fontWeight: 700, color: "#fff", letterSpacing: -0.3 }}>J</span>
         </div>
         <div>
-          <div style={{ fontFamily: SERIF, fontSize: 16, fontWeight: 700, color: T.text, letterSpacing: -0.3, lineHeight: 1.1 }}>Juratone</div>
-          <div style={{ fontFamily: SANS, fontSize: 8, color: T.dim, letterSpacing: 2, textTransform: "uppercase" }}>Pro · Belgique</div>
+          <div style={{ fontFamily: SERIF, fontSize: 15, fontWeight: 700, color: T.text, letterSpacing: -0.2, lineHeight: 1.1 }}>Juratone</div>
+          <div style={{ fontFamily: SANS, fontSize: 8, color: T.dim, letterSpacing: 2.5, textTransform: "uppercase", fontWeight: 500 }}>Pro · Belgique</div>
         </div>
       </button>
-      <nav style={{ display: "flex", gap: 2 }} aria-label="Navigation principale">
+      <nav style={{ display: "flex", gap: 2, alignItems: "center" }} aria-label="Navigation principale">
         <button className="nav-link" onClick={() => goToSection(setPage, "situations")}>Ma situation</button>
         <button className="nav-link" onClick={() => goToSection(setPage, "outils")}>Outils</button>
         <button className="nav-link" onClick={() => setPage("jurisprudence")}>Ressources</button>
@@ -296,10 +375,15 @@ const Header = ({ setPage }) => (
 );
 
 const Footer = () => (
-  <footer style={{ background: T.s2, borderTop: `1px solid ${T.border}`, padding: "28px 32px" }}>
-    <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-      <span style={{ fontFamily: SANS, fontSize: 10, color: T.dim, letterSpacing: 1, textTransform: "uppercase" }}>Juratone Pro v2.0 — Belgique</span>
-      <span style={{ fontFamily: SANS, fontSize: 10, color: T.dim, maxWidth: 480, textAlign: "right", lineHeight: 1.6 }}>Simulation indicative. Ne constitue pas un avis juridique. Consultez un professionnel du droit.</span>
+  <footer style={{
+    background: "rgba(255,255,255,0.45)",
+    backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+    borderTop: "1px solid rgba(255,255,255,0.65)",
+    padding: "24px 36px"
+  }}>
+    <div style={{ maxWidth: 960, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+      <span style={{ fontFamily: SANS, fontSize: 10, color: T.dim, letterSpacing: 1.5, textTransform: "uppercase", fontWeight: 500 }}>Juratone Pro v2.0 — Belgique</span>
+      <span style={{ fontFamily: SANS, fontSize: 10, color: T.dim, maxWidth: 480, textAlign: "right", lineHeight: 1.7 }}>Simulation indicative. Ne constitue pas un avis juridique. Consultez un professionnel du droit.</span>
     </div>
   </footer>
 );
@@ -308,102 +392,165 @@ const Footer = () => (
    BLOC 7 — PAGES
 ═══════════════════════════════════════════════════════════════ */
 const HomePage = ({ setPage }) => (
-  <div>
-    <section style={{ background: T.bg, padding: "96px 0 80px" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", gap: 8, marginBottom: 28, flexWrap: "wrap" }}>
-          <Badge color="navy">Belgique</Badge>
+  <div className="page-wrap">
+
+    {/* Blobs ambiants */}
+    <div className="bg-blobs">
+      <div className="blob blob-1" />
+      <div className="blob blob-2" />
+      <div className="blob blob-3" />
+    </div>
+
+    {/* Hero */}
+    <section style={{ padding: "110px 0 90px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>
+        <div style={{ display: "flex", gap: 8, marginBottom: 36, flexWrap: "wrap" }}>
+          <Badge color="gray">Belgique</Badge>
           <Badge color="green">Gratuit</Badge>
           <Badge color="gold">Français</Badge>
         </div>
-        <h1 style={{ fontFamily: SERIF, fontSize: "clamp(40px,5vw,64px)", fontWeight: 700, color: T.text, margin: "0 0 20px", lineHeight: 1.1, letterSpacing: -1 }}>
-          Vos droits.<br /><span style={{ color: T.navy }}>En clair.</span>
+        <h1 style={{
+          fontFamily: SERIF,
+          fontSize: "clamp(52px,7vw,96px)",
+          fontWeight: 400,
+          color: T.text,
+          margin: "0 0 24px",
+          lineHeight: 1.05,
+          letterSpacing: -2
+        }}>
+          Vos droits.<br />
+          <span style={{ color: "rgba(10,10,10,0.30)", fontStyle: "italic" }}>En clair.</span>
         </h1>
-        <p style={{ fontFamily: SANS, fontSize: 17, color: T.muted, maxWidth: 520, margin: "0 0 40px", lineHeight: 1.7 }}>
+        <p style={{ fontFamily: SANS, fontSize: 16, color: T.muted, maxWidth: 480, margin: "0 0 44px", lineHeight: 1.75, fontWeight: 300 }}>
           La première plateforme belge qui explique le droit en langage humain, calcule vos délais et vous guide selon votre situation de vie.
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <Btn size="lg" icon={<IcoArrow size={16} color="#fff" />} onClick={() => goToSection(setPage, "sources")}>Explorer les sources</Btn>
+          <Btn size="lg" icon={<IcoArrow size={15} color="#fff" />} onClick={() => goToSection(setPage, "sources")}>Explorer les sources</Btn>
           <Btn variant="outline" size="lg" onClick={() => goToSection(setPage, "situations")}>Ma situation</Btn>
         </div>
       </div>
     </section>
 
-    <Section id="sources" bg={T.surface}>
+    {/* Sources juridiques */}
+    <Section id="sources">
       <SectionHeader
         eyebrow="POINT DE DÉPART"
-        title="Explorez les sources du droit belge"
+        title="Sources du droit belge"
         subtitle="Accédez directement aux textes officiels, aux décisions de justice et à la doctrine structurée."
       />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 16 }}>
+      <div style={{ maxWidth: 640 }}>
         {RESSOURCES.map(r => <ResourceCard key={r.id} {...r} onClick={() => setPage(r.id)} />)}
       </div>
     </Section>
 
-    <Section id="situations" bg={T.bg}>
+    {/* Situations */}
+    <Section id="situations">
       <SectionHeader
         eyebrow="VOTRE CAS"
         title="Guidé par votre situation"
         subtitle="Choisissez ce qui vous concerne. La plateforme regroupe automatiquement tout ce dont vous avez besoin."
       />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 20 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 16 }}>
         {SITUATIONS.map(s => <SituationCard key={s.id} {...s} onClick={() => setPage(s.id)} />)}
       </div>
     </Section>
 
-    <Section id="outils" bg={T.surface}>
-      <SectionHeader eyebrow="CALCULATEURS" title="Simulateurs & outils pratiques" mb={32} />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 12 }}>
+    {/* Outils */}
+    <Section id="outils">
+      <SectionHeader eyebrow="CALCULATEURS" title="Simulateurs & outils pratiques" mb={36} />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: 10 }}>
         {OUTILS.map(o => <ToolCard key={o.id} {...o} onClick={() => setPage(o.id)} />)}
       </div>
     </Section>
 
-    <section style={{ background: T.navy, padding: "64px 32px", textAlign: "center" }}>
-      <p style={{ fontFamily: SERIF, fontSize: 26, fontWeight: 700, color: "#fff", margin: "0 0 10px" }}>Juratone Pro est gratuit. Pour tous.</p>
-      <p style={{ fontFamily: SANS, fontSize: 15, color: "rgba(255,255,255,0.55)", margin: "0 0 32px" }}>Aucun abonnement. Aucune publicité. Construit pour les citoyens belges.</p>
-      <Btn variant="ghost" size="lg" icon={<IcoArrow size={16} color="#fff" />} onClick={() => goToSection(setPage, "sources")}>Commencer maintenant</Btn>
+    {/* CTA final */}
+    <section style={{ padding: "80px 36px", textAlign: "center" }}>
+      <div style={{
+        maxWidth: 580, margin: "0 auto",
+        background: "rgba(10,10,10,0.92)",
+        backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+        borderRadius: 28,
+        padding: "64px 48px",
+        boxShadow: "0 24px 80px rgba(10,10,10,0.16)"
+      }}>
+        <p style={{ fontFamily: SERIF, fontSize: "clamp(22px,3vw,30px)", fontWeight: 400, color: "#fff", margin: "0 0 12px", letterSpacing: -0.5 }}>
+          Juratone Pro est gratuit.<br /><span style={{ opacity: 0.5, fontStyle: "italic" }}>Pour tous.</span>
+        </p>
+        <p style={{ fontFamily: SANS, fontSize: 13, color: "rgba(255,255,255,0.40)", margin: "0 0 36px", lineHeight: 1.7, fontWeight: 300 }}>Aucun abonnement. Aucune publicité. Construit pour les citoyens belges.</p>
+        <Btn variant="ghost" size="lg" icon={<IcoArrow size={15} color="#fff" />} onClick={() => goToSection(setPage, "sources")}>Commencer maintenant</Btn>
+      </div>
     </section>
+
   </div>
 );
 
 const MODULE_STUBS = ["Vos droits essentiels", "Vos délais légaux", "Vos démarches", "Vos documents"];
 
 const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
-  <div style={{ maxWidth: 900, margin: "0 auto", padding: "64px 32px" }}>
-    <BackButton setPage={setPage} />
-    <div style={{ display: "flex", alignItems: "flex-start", gap: 24, marginBottom: 48 }}>
-      <div style={{ width: 72, height: 72, borderRadius: 18, background: T.navyLight, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: T.sh2 }}>
-        <Icon size={32} color={T.navy} />
-      </div>
-      <div>
-        <h1 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 700, color: T.text, margin: "0 0 8px" }}>{title}</h1>
-        <p style={{ fontFamily: SANS, fontSize: 15, color: T.muted, margin: 0, lineHeight: 1.6 }}>{fullDesc}</p>
-      </div>
+  <div className="page-wrap">
+    <div className="bg-blobs">
+      <div className="blob blob-1" />
+      <div className="blob blob-2" />
     </div>
-    {MODULE_STUBS.map((label, i) => (
-      <div key={label} style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14, padding: "24px 28px", marginBottom: 14, boxShadow: T.sh1, display: "flex", alignItems: "center", gap: 20 }}>
-        <div style={{ width: 40, height: 40, borderRadius: 10, background: T.s2, flexShrink: 0 }} />
-        <div style={{ flex: 1 }}>
-          <div style={{ fontFamily: SANS, fontSize: 15, fontWeight: 700, color: T.text, marginBottom: 8 }}>{label}</div>
-          <div style={{ height: 8, borderRadius: 4, background: T.s3, width: `${55 + i * 12}%` }} />
+    <div style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
+      <BackButton setPage={setPage} />
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 24, marginBottom: 56 }}>
+        <div style={{
+          width: 68, height: 68, borderRadius: 18, flexShrink: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(255,255,255,0.65)",
+          backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
+          border: "1px solid rgba(255,255,255,0.8)",
+          boxShadow: T.sh2
+        }}>
+          <Icon size={28} color={T.navy} />
         </div>
-        <Badge color="gray">Bientôt</Badge>
+        <div>
+          <h1 style={{ fontFamily: SERIF, fontSize: "clamp(28px,4vw,44px)", fontWeight: 400, color: T.text, margin: "0 0 10px", letterSpacing: -0.5 }}>{title}</h1>
+          <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: 0, lineHeight: 1.7, fontWeight: 300 }}>{fullDesc}</p>
+        </div>
       </div>
-    ))}
-    <div style={{ marginTop: 28, padding: "18px 22px", background: T.navyLight, borderRadius: 12, border: `1px solid ${T.navyDim}`, fontFamily: SANS, fontSize: 13, color: T.navy, lineHeight: 1.6 }}>
-      <strong>En cours de développement.</strong> Ce module sera disponible prochainement.
+      {MODULE_STUBS.map((label, i) => (
+        <div key={label} style={{
+          background: "rgba(255,255,255,0.60)",
+          backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.78)",
+          borderRadius: 18, padding: "22px 28px", marginBottom: 10,
+          boxShadow: "0 2px 16px rgba(10,10,10,0.05), 0 1px 0 rgba(255,255,255,0.9) inset",
+          display: "flex", alignItems: "center", gap: 20
+        }}>
+          <div style={{ width: 38, height: 38, borderRadius: 10, background: "rgba(10,10,10,0.04)", flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: SANS, fontSize: 14, fontWeight: 500, color: T.text, marginBottom: 8 }}>{label}</div>
+            <div style={{ height: 6, borderRadius: 3, background: "rgba(10,10,10,0.07)", width: `${55 + i * 12}%` }} />
+          </div>
+          <Badge color="gray">Bientôt</Badge>
+        </div>
+      ))}
+      <div style={{ marginTop: 28, padding: "18px 22px", background: "rgba(255,255,255,0.50)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.75)", fontFamily: SANS, fontSize: 13, color: T.muted, lineHeight: 1.6 }}>
+        <strong style={{ color: T.text, fontWeight: 500 }}>En cours de développement.</strong> Ce module sera disponible prochainement.
+      </div>
     </div>
   </div>
 );
 
 const GenericPage = ({ setPage }) => (
-  <div style={{ maxWidth: 900, margin: "0 auto", padding: "64px 32px" }}>
-    <BackButton setPage={setPage} />
-    <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
-      <IcoGavel size={32} color={T.dim} />
-      <h2 style={{ fontFamily: SERIF, fontSize: 24, color: T.text, margin: "20px 0 10px" }}>Module en cours de migration</h2>
-      <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 28px", lineHeight: 1.6 }}>Les outils existants seront intégrés ici avec la nouvelle interface.</p>
-      <Btn onClick={() => setPage("home")}>Retour à l'accueil</Btn>
+  <div className="page-wrap">
+    <div className="bg-blobs"><div className="blob blob-1" /><div className="blob blob-2" /></div>
+    <div style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
+      <BackButton setPage={setPage} />
+      <div style={{
+        background: "rgba(255,255,255,0.65)",
+        backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+        border: "1px solid rgba(255,255,255,0.80)",
+        borderRadius: 24, padding: "64px 48px", textAlign: "center",
+        boxShadow: "0 8px 40px rgba(10,10,10,0.07), 0 1px 0 rgba(255,255,255,0.9) inset"
+      }}>
+        <IcoGavel size={28} color={T.dim} />
+        <h2 style={{ fontFamily: SERIF, fontSize: 26, fontWeight: 400, color: T.text, margin: "20px 0 10px", letterSpacing: -0.3 }}>Module en cours de migration</h2>
+        <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 32px", lineHeight: 1.7, fontWeight: 300 }}>Les outils existants seront intégrés ici avec la nouvelle interface.</p>
+        <Btn onClick={() => setPage("home")}>Retour à l'accueil</Btn>
+      </div>
     </div>
   </div>
 );
@@ -416,7 +563,7 @@ export default function JuratonePro() {
   const [page, setPage] = useState("home");
   const situation = SITUATION_MAP[page];
   return (
-    <div style={{ fontFamily: SANS, background: T.bg, color: T.text, minHeight: "100vh" }}>
+    <div style={{ fontFamily: SANS, background: T.bg, color: T.text, minHeight: "100vh", position: "relative" }}>
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
       <Header setPage={setPage} />
       <main>
