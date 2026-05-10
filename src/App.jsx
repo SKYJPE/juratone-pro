@@ -144,6 +144,31 @@ const GLOBAL_CSS = `
   .btn-back { font-family: ${SANS}; font-size: 12px; color: ${T.muted}; background: none; border: none; cursor: pointer; padding: 0 0 36px; display: flex; align-items: center; gap: 6px; transition: color .15s; letter-spacing: 0.2px; }
   .btn-back:hover { color: ${T.navy}; }
   .logo-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 10px; }
+
+  /* ── Responsive mobile ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 12px !important; }
+    .main-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .nav-link { padding: 5px 8px !important; font-size: 11px !important; }
+
+    .hero-section { padding: 64px 0 48px !important; }
+    .section-inner { padding: 0 16px !important; }
+    .section { padding: 64px 0 !important; }
+
+    .footer-pad { padding: 20px 16px !important; }
+
+    .cta-section { padding: 48px 16px !important; }
+    .cta-card { padding: 40px 24px !important; border-radius: 20px !important; }
+
+    .page-pad { padding: 40px 16px !important; }
+    .generic-card { padding: 40px 24px !important; border-radius: 18px !important; }
+
+    .sit-header { flex-direction: column !important; gap: 16px !important; }
+
+    .leg-pad { padding: 32px 16px 64px !important; }
+    .civil-card { padding: 32px 20px !important; }
+    .art-card { padding: 24px 20px !important; }
+  }
 `;
 
 /* ═══════════════════════════════════════════════════════════════
@@ -327,8 +352,8 @@ const BackButton = ({ setPage }) => (
 );
 
 const Section = ({ id, children }) => (
-  <section id={id} style={{ padding: "96px 0" }}>
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>{children}</div>
+  <section id={id} className="section" style={{ padding: "96px 0" }}>
+    <div className="section-inner" style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>{children}</div>
   </section>
 );
 
@@ -349,7 +374,7 @@ const Header = ({ setPage }) => (
     borderBottom: "1px solid rgba(255,255,255,0.70)",
     boxShadow: "0 1px 24px rgba(10,10,10,0.04)"
   }}>
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <div className="header-inner" style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <button className="logo-btn" onClick={() => setPage("home")} aria-label="Juratone Pro — Accueil">
         <div style={{
           width: 34, height: 34, borderRadius: 10,
@@ -364,7 +389,7 @@ const Header = ({ setPage }) => (
           <div style={{ fontFamily: SANS, fontSize: 8, color: T.dim, letterSpacing: 2.5, textTransform: "uppercase", fontWeight: 500 }}>Pro · Belgique</div>
         </div>
       </button>
-      <nav style={{ display: "flex", gap: 2, alignItems: "center" }} aria-label="Navigation principale">
+      <nav className="main-nav" style={{ display: "flex", gap: 2, alignItems: "center" }} aria-label="Navigation principale">
         <button className="nav-link" onClick={() => goToSection(setPage, "situations")}>Ma situation</button>
         <button className="nav-link" onClick={() => goToSection(setPage, "outils")}>Outils</button>
         <button className="nav-link" onClick={() => setPage("jurisprudence")}>Ressources</button>
@@ -375,7 +400,7 @@ const Header = ({ setPage }) => (
 );
 
 const Footer = () => (
-  <footer style={{
+  <footer className="footer-pad" style={{
     background: "rgba(255,255,255,0.45)",
     backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
     borderTop: "1px solid rgba(255,255,255,0.65)",
@@ -402,8 +427,8 @@ const HomePage = ({ setPage }) => (
     </div>
 
     {/* Hero */}
-    <section style={{ padding: "110px 0 90px" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>
+    <section className="hero-section" style={{ padding: "110px 0 90px" }}>
+      <div className="section-inner" style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>
         <div style={{ display: "flex", gap: 8, marginBottom: 36, flexWrap: "wrap" }}>
           <Badge color="gray">Belgique</Badge>
           <Badge color="green">Gratuit</Badge>
@@ -464,8 +489,8 @@ const HomePage = ({ setPage }) => (
     </Section>
 
     {/* CTA final */}
-    <section style={{ padding: "80px 36px", textAlign: "center" }}>
-      <div style={{
+    <section className="cta-section" style={{ padding: "80px 36px", textAlign: "center" }}>
+      <div className="cta-card" style={{
         maxWidth: 580, margin: "0 auto",
         background: "rgba(10,10,10,0.92)",
         backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
@@ -492,9 +517,9 @@ const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
       <div className="blob blob-1" />
       <div className="blob blob-2" />
     </div>
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
+    <div className="page-pad" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
       <BackButton setPage={setPage} />
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 24, marginBottom: 56 }}>
+      <div className="sit-header" style={{ display: "flex", alignItems: "flex-start", gap: 24, marginBottom: 56 }}>
         <div style={{
           width: 68, height: 68, borderRadius: 18, flexShrink: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -537,9 +562,9 @@ const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
 const GenericPage = ({ setPage }) => (
   <div className="page-wrap">
     <div className="bg-blobs"><div className="blob blob-1" /><div className="blob blob-2" /></div>
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
+    <div className="page-pad" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
       <BackButton setPage={setPage} />
-      <div style={{
+      <div className="generic-card" style={{
         background: "rgba(255,255,255,0.65)",
         backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
         border: "1px solid rgba(255,255,255,0.80)",
@@ -4946,7 +4971,7 @@ const CjChapitreView = ({ chap, onSelectArticle }) => (
 
 const CjArticleView = ({ article, prevArt, nextArt, onNav }) => (
   <div>
-    <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14, padding: "32px 36px", boxShadow: T.sh2 }}>
+    <div className="art-card" style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14, padding: "32px 36px", boxShadow: T.sh2 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 24, paddingBottom: 20, borderBottom: `1px solid ${T.border}` }}>
         <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 800, color: T.dim, letterSpacing: 2, textTransform: "uppercase" }}>Article</span>
         <span style={{ fontFamily: SERIF, fontSize: 40, fontWeight: 700, color: T.navy, lineHeight: 1 }}>{article.numero}</span>
@@ -5051,7 +5076,7 @@ const LegislationPage = ({ setPage }) => {
   if (currentArticle)  crumbs.push({ label: `Article ${currentArticle.numero}` });
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 32px 80px" }}>
+    <div className="leg-pad" style={{ maxWidth: 900, margin: "0 auto", padding: "48px 32px 80px" }}>
       <style dangerouslySetInnerHTML={{ __html: LEG_CSS }} />
 
       <button className="btn-back" onClick={() => setPage("home")}>
@@ -5079,7 +5104,7 @@ const LegislationPage = ({ setPage }) => {
       {(() => {
         if (navCodeId === "civil") {
           return (
-            <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
+            <div className="civil-card" style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 16, padding: "56px", textAlign: "center", boxShadow: T.sh2 }}>
               <IcoScales size={32} color={T.dim} />
               <h2 style={{ fontFamily: SERIF, fontSize: 24, color: T.text, margin: "20px 0 10px" }}>Code Civil en cours de développement</h2>
               <p style={{ fontFamily: SANS, fontSize: 14, color: T.muted, margin: "0 0 28px", lineHeight: 1.6 }}>Le code civil sera bientôt disponible avec la même interface interactive.</p>
