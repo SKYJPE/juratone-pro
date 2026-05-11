@@ -549,6 +549,10 @@ const GenericPage = ({ setPage }) => (
 export default function JuratonePro() {
   const [page, setPage] = useState("home");
   const situation = SITUATION_MAP[page];
+  useEffect(() => {
+    document.body.style.background = T.bg;
+    document.body.style.margin = "0";
+  }, []);
   return (
     <div style={{ fontFamily: SANS, background: T.bg, color: T.text, minHeight: "100vh", position: "relative" }}>
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
