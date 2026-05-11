@@ -42,8 +42,7 @@ const GLOBAL_CSS = `
 
   /* ── Cartes glass ── */
   .card-sit {
-    background: rgba(255,255,255,0.65);
-    backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(255,255,255,0.85);
     border: 1px solid rgba(255,255,255,0.80); border-radius: 22px;
     padding: 32px 28px; cursor: pointer;
     box-shadow: 0 4px 24px rgba(10,10,10,0.06), 0 1px 0 rgba(255,255,255,0.9) inset;
@@ -73,8 +72,7 @@ const GLOBAL_CSS = `
   .card-sit:hover .cta { opacity: 1; }
 
   .card-tool {
-    background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
+    background: rgba(255,255,255,0.75);
     border: 1px solid rgba(255,255,255,0.75); border-radius: 16px;
     padding: 18px 20px; cursor: pointer;
     box-shadow: 0 2px 12px rgba(10,10,10,0.05), 0 1px 0 rgba(255,255,255,0.85) inset;
@@ -350,9 +348,7 @@ const SectionHeader = ({ eyebrow, title, subtitle, mb = 48 }) => (
 const Header = ({ setPage }) => (
   <header style={{
     position: "sticky", top: 0, zIndex: 100,
-    background: "rgba(246,244,239,0.72)",
-    backdropFilter: "blur(28px) saturate(200%)",
-    WebkitBackdropFilter: "blur(28px) saturate(200%)",
+    background: "rgba(246,244,239,0.95)",
     borderBottom: "1px solid rgba(255,255,255,0.70)",
     boxShadow: "0 1px 24px rgba(10,10,10,0.04)"
   }}>
@@ -383,8 +379,7 @@ const Header = ({ setPage }) => (
 
 const Footer = () => (
   <footer className="footer-pad" style={{
-    background: "rgba(255,255,255,0.45)",
-    backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+    background: "rgba(255,255,255,0.65)",
     borderTop: "1px solid rgba(255,255,255,0.65)",
     padding: "24px 36px"
   }}>
@@ -467,8 +462,7 @@ const HomePage = ({ setPage }) => (
     <section className="cta-section" style={{ padding: "80px 36px", textAlign: "center" }}>
       <div className="cta-card" style={{
         maxWidth: 580, margin: "0 auto",
-        background: "rgba(10,10,10,0.92)",
-        backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+        background: "rgba(10,10,10,0.95)",
         borderRadius: 28,
         padding: "64px 48px",
         boxShadow: "0 24px 80px rgba(10,10,10,0.16)"
@@ -508,8 +502,7 @@ const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
       </div>
       {MODULE_STUBS.map((label, i) => (
         <div key={label} style={{
-          background: "rgba(255,255,255,0.60)",
-          backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          background: "rgba(255,255,255,0.80)",
           border: "1px solid rgba(255,255,255,0.78)",
           borderRadius: 18, padding: "22px 28px", marginBottom: 10,
           boxShadow: "0 2px 16px rgba(10,10,10,0.05), 0 1px 0 rgba(255,255,255,0.9) inset",
@@ -523,7 +516,7 @@ const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
           <Badge color="gray">Bientôt</Badge>
         </div>
       ))}
-      <div style={{ marginTop: 28, padding: "18px 22px", background: "rgba(255,255,255,0.50)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.75)", fontFamily: SANS, fontSize: 13, color: T.muted, lineHeight: 1.6 }}>
+      <div style={{ marginTop: 28, padding: "18px 22px", background: "rgba(255,255,255,0.70)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.75)", fontFamily: SANS, fontSize: 13, color: T.muted, lineHeight: 1.6 }}>
         <strong style={{ color: T.text, fontWeight: 500 }}>En cours de développement.</strong> Ce module sera disponible prochainement.
       </div>
     </div>
@@ -535,8 +528,7 @@ const GenericPage = ({ setPage }) => (
     <div className="page-pad" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
       <BackButton setPage={setPage} />
       <div className="generic-card" style={{
-        background: "rgba(255,255,255,0.65)",
-        backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+        background: "rgba(255,255,255,0.85)",
         border: "1px solid rgba(255,255,255,0.80)",
         borderRadius: 24, padding: "64px 48px", textAlign: "center",
         boxShadow: "0 8px 40px rgba(10,10,10,0.07), 0 1px 0 rgba(255,255,255,0.9) inset"
