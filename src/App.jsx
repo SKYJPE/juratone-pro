@@ -40,25 +40,6 @@ const GLOBAL_CSS = `
   body { margin: 0; background: ${T.bg}; }
   ::selection { background: rgba(10,10,10,0.08); color: ${T.navy}; }
 
-  /* ── Blobs ambiants ── */
-  .bg-blobs {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-  }
-  .blob { position: absolute; border-radius: 50%; filter: blur(90px); }
-  .blob-1 {
-    top: -15%; left: -8%; width: 55vw; height: 55vw; max-width: 700px; max-height: 700px;
-    background: radial-gradient(circle, rgba(180,195,255,0.22) 0%, transparent 70%);
-  }
-  .blob-2 {
-    bottom: 5%; right: -5%; width: 45vw; height: 45vw; max-width: 580px; max-height: 580px;
-    background: radial-gradient(circle, rgba(255,215,160,0.18) 0%, transparent 70%);
-  }
-  .blob-3 {
-    top: 40%; left: 30%; width: 35vw; height: 35vw; max-width: 420px; max-height: 420px;
-    background: radial-gradient(circle, rgba(190,240,210,0.12) 0%, transparent 70%);
-  }
-  .page-wrap { position: relative; z-index: 1; }
-
   /* ── Cartes glass ── */
   .card-sit {
     background: rgba(255,255,255,0.65);
@@ -420,13 +401,6 @@ const Footer = () => (
 const HomePage = ({ setPage }) => (
   <div className="page-wrap">
 
-    {/* Blobs ambiants */}
-    <div className="bg-blobs">
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
-      <div className="blob blob-3" />
-    </div>
-
     {/* Hero */}
     <section className="hero-section" style={{ padding: "110px 0 90px" }}>
       <div className="section-inner" style={{ maxWidth: 960, margin: "0 auto", padding: "0 36px" }}>
@@ -514,10 +488,6 @@ const MODULE_STUBS = ["Vos droits essentiels", "Vos délais légaux", "Vos déma
 
 const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
   <div className="page-wrap">
-    <div className="bg-blobs">
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
-    </div>
     <div className="page-pad" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
       <BackButton setPage={setPage} />
       <div className="sit-header" style={{ display: "flex", alignItems: "flex-start", gap: 24, marginBottom: 56 }}>
@@ -562,7 +532,6 @@ const SituationPage = ({ title, fullDesc, Icon, setPage }) => (
 
 const GenericPage = ({ setPage }) => (
   <div className="page-wrap">
-    <div className="bg-blobs"><div className="blob blob-1" /><div className="blob blob-2" /></div>
     <div className="page-pad" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 36px" }}>
       <BackButton setPage={setPage} />
       <div className="generic-card" style={{
